@@ -1,0 +1,24 @@
+硬盘设备查询：lsblk
+lsblk: 列出所有块设备
+-d 参数只显示的主块设备，如：lsblk -d
+如果只有lsblk的话，则显示所有块设备包括lvm虚拟出来的块设备
+• 块设备统计：iostat [option] [secs]、pidstat -d
+iostat: 显示所有块设备的IO统计，每个字段是什么含意？
+-x 显示详细信息，如: iostat -x 1
+pidstat -d: 显示进程的IO统计
+• 分区命令：fdisk、parted
+fdisk: 仅支持MBR分区格式，最大支持2T，默认按512B对齐
+parted: 支持gpt分区格式，支持超过2T容量
+• 逻辑卷管理LVM：vgs、lvs、lvcreate、lvremove、lvresize
+vgs:查询卷组简要信息，容量使用情况
+lvs: 查询逻辑卷简要信息，显示所有lv
+• 文件系统信息查看：mount、df、du、mkfs
+mount: 显示当前系统所有挂载的文件系统
+df: 查询磁盘使用情况； du: 查询当前目录空间占用情况
+mkfs: 格式化文件系统
+问题
+• 系统变慢了，如何确认是IO引起的？观察iostat util/await/svctm/avgqu
+• 如果分区没有对齐，硬盘会有什么样的行为？硬盘 util 容易100%
+• 如何定位空间不足了？df
+• 日志分区满了，如何定位是哪个文件占用掉了？du
+• 硬盘被重新分区或文件系统重新格式化了，其硬盘中的数据是否真的丢失了？
